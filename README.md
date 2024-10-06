@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GenAI Powered Guiding-Tour-Navigation Chat Feature
+This project implements a GenAI-powered Guiding Tour generation support Chat feature using Next.js 14 with TypeScript. It leverages the CopilotKit library for application context understanding and tour building, Groq API for AI models, and Shepherd.js for the UI of tour guides.
 
-## Getting Started
+Tired of navigating through 100s of features, buttons, inputs, forms in complex websites?    
+for ex like Video Editing Softwares, or Cloud Providers websites, package documentation.  
+### *Ask a query like 'How do i import audio from URL?' and let the AI do the magic for you!*
 
-First, run the development server:
+![image](https://github.com/user-attachments/assets/f4f01b20-5dcd-47c0-8c94-e57d60f8f279)
 
-```bash
+![image](https://github.com/user-attachments/assets/aa902347-5fa5-45e1-99e5-dbc24448573e)
+
+![image](https://github.com/user-attachments/assets/6a48d730-1d8f-4857-9dc9-51a544ad5893)
+
+![image](https://github.com/user-attachments/assets/23004ab5-c190-4316-87e7-5bde2ada87f5)
+
+![image](https://github.com/user-attachments/assets/611c8362-9865-4f04-a05a-0693046c97d9)
+
+## Tech Stack
+
+- Next.js 14
+- TypeScript
+- CopilotKit
+- Groq API
+- Shepherd.js
+
+## Prerequisites
+
+1. Groq API key
+
+## Installation
+
+Clone the repository:
+```
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
+```
+
+Install dependencies:
+```
+npm install
+# or
+yarn install
+```
+
+Set up environment variables:
+Create a .env.local file in the root directory and add your Groq API key:
+```
+GROQ_API_KEY=your_api_key_here
+```
+
+Usage
+
+Start the development server:
+```
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser and navigate to ```http://localhost:3000```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Components
+CopilotKit Integration > This project uses the following hooks from CopilotKit:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- useCopilotAction: For handling tour generating actions.
+- useCopilotReadable: For reading and understanding the application context.
+- useCopilotChatSuggestions: For generating chat suggestions for guiding tours.
