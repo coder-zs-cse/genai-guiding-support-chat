@@ -22,7 +22,11 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, depth = 0 }) => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        // Check if the click is on the step-renderer
+        const stepRenderer = (event.target as Element).closest('.step-renderer');
+        if (!stepRenderer) {
+          setIsOpen(false);
+        }
       }
     };
 

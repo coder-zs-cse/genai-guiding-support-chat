@@ -100,7 +100,7 @@ const App = () => {
   };
 
   return (
-    <div className="app debug relative ">
+    <div className="app debug relat ">
       {/* <HelpAgent onStartTour={startTour} /> */}
       <CopilotPopup
         labels={{

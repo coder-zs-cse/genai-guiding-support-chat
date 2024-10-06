@@ -37,18 +37,18 @@ const GuidedTour: React.FC<GuidedTourProps> = ({ steps, onEnd }) => {
     style.innerHTML = `${selector} { outline: 2px solid blue; box-shadow: 0 0 10px rgba(0,0,255,0.5); }`;
     document.head.appendChild(style);
 
-    waitForElement(selector, (targetElement) => {
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // waitForElement(selector, (targetElement) => {
+    //   targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       
-      const handleElementClick = () => {
-        handleNext();
-      };
-      targetElement.addEventListener('click', handleElementClick);
+    //   const handleElementClick = () => {
+    //     handleNext();
+    //   };
+    //   targetElement.addEventListener('click', handleElementClick);
 
-      return () => {
-        targetElement.removeEventListener('click', handleElementClick);
-      };
-    });
+    //   return () => {
+    //     targetElement.removeEventListener('click', handleElementClick);
+    //   };
+    // });
 
     return () => {
       document.head.removeChild(style);
