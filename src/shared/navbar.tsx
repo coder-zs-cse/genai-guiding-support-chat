@@ -39,8 +39,6 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, depth = 0 }) => {
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center px-4 py-2 hover:bg-gray-100 w-full text-left"
           id={item.id}
-          // data-guide-id={item.id}
-          // aria-label={item.description}
         >
           {item.label}
           {isOpen ? <ChevronDown className="ml-1" size={14} /> : <ChevronRight className="ml-1" size={14} />}
