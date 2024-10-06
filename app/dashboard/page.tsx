@@ -24,7 +24,7 @@ const App = () => {
 
   useCopilotChatSuggestions(
     {
-      instructions: "Suggest possible features to take guided tour of",
+      instructions: "What guides can user possibly take?",
     },
     [navbar],
   );
