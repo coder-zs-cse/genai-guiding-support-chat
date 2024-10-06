@@ -1,7 +1,9 @@
 # GenAI Powered Guiding-Tour-Navigation Chat Feature
-This project implements a GenAI-powered Guiding Tour generation support Chat feature using Next.js 14 with TypeScript. It leverages the CopilotKit library for context understanding and tour building, Groq API for AI models, and Shepherd.js for the UI of tour guides.
+This project implements a GenAI-powered Guiding Tour generation support Chat feature using Next.js 14 with TypeScript. It leverages the CopilotKit library for application context understanding and tour building, Groq API for AI models, and Shepherd.js for the UI of tour guides.
 
-*Ask a query like 'How do i import audio from URL?' and let the AI do the magic for you!*
+Tired of navigating through 100s of features, buttons, inputs, forms in complex websites?    
+for ex like Video Editing Softwares, or Cloud Providers websites, package documentation.  
+### *Ask a query like 'How do i import audio from URL?' and let the AI do the magic for you!*
 
 ![image](https://github.com/user-attachments/assets/f4f01b20-5dcd-47c0-8c94-e57d60f8f279)
 
@@ -60,6 +62,6 @@ Open your browser and navigate to ```http://localhost:3000```
 ## Key Components
 CopilotKit Integration > This project uses the following hooks from CopilotKit:
 
-- useCopilotAction: For handling tour-related actions
-- useCopilotReadable: For reading and understanding the app context
-- useCopilotChatSuggestions: For generating chat suggestions during the tour
+- useCopilotAction: For handling tour generating actions.
+- useCopilotReadable: For reading and understanding the application context.
+- useCopilotChatSuggestions: For generating chat suggestions for guiding tours.
