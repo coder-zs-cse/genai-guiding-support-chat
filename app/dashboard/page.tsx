@@ -45,12 +45,24 @@ const App = () => {
               description: "Unique identifier for the step",
               required: true,
             },
-            highlightSelector: {
-              type: "string",
-              description: "CSS selector id for the element to be highlighted",
+            attachTo: {
+              type: "object",
+              properties: {
+                element: {
+                  type: "string",
+                  description: "CSS selector for the element to be highlighted",
+                  required: true,
+                },
+                on: {
+                  type: "string",
+                  enum: ["top", "bottom", "left", "right"],
+                  description: "Position of the tooltip relative to the element",
+                  required: true,
+                },
+              },
               required: true,
             },
-            description: {
+            text: {
               type: "string",
               description: "Description of the step",
               required: true,
@@ -59,40 +71,12 @@ const App = () => {
         }
       }
     ],
-    handler: (args: { steps: { id: string, highlightSelector: string, description: string }[] }) => {
+    handler: (args: { steps: Step[] }) => {
       console.log("args.steps", args.steps);
-
       setTourSteps(args.steps);
       setIsTourActive(true);
     }
-
   });
-
-  // useCopilotAction({
-  //   name: "buildSteps",
-  //   description: "Build a guide with steps as per user query",
-  //   parameters: [
-  //     {
-  //       name: "steps",
-  //       description: "List of css selector id of buttons to be clicked",
-  //       type: "string[]",
-  //       items: {
-  //         type: "string",
-  //         description: "CSS selector id for the element to be clicked",
-  //         required: true,
-  //       },
-  //     },
-  //   ],
-  //   handler: (args: { steps: string[] }) => {
-  //     console.log("args.steps", args.steps);
-  //     // setTourSteps(args.steps);
-  //     // setIsTourActive(true);
-  //   },
-  // });
-  const startTour = (steps: Step[]) => {
-    setTourSteps(steps);
-    setIsTourActive(true);
-  };
 
   const endTour = () => {
     setIsTourActive(false);
@@ -108,7 +92,6 @@ const App = () => {
           initial: "Ask me anything about the application",
         }}
       />
-      Hello
       {isTourActive && <GuidedTour steps={tourSteps} onEnd={endTour} />}
     </div>
   );

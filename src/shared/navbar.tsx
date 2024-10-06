@@ -41,14 +41,14 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, depth = 0 }) => {
       <li ref={menuRef} className={`relative ${depth === 0 ? 'group' : ''}`}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="flex items-center px-4 py-2 hover:bg-gray-100 hover:text-black w-full text-left"
           id={item.id}
         >
           {item.label}
           {isOpen ? <ChevronDown className="ml-1" size={14} /> : <ChevronRight className="ml-1" size={14} />}
         </button>
         {isOpen && (
-          <ul className={`absolute z-50 bg-white border border-gray-200 rounded shadow-lg ${
+          <ul className={`absolute z-50 bg-black text-white border border-gray-200 rounded shadow-lg ${
             depth === 0 ? 'left-0 top-full' : 'left-full top-0'
           } w-48`}>
             {item.subItems.map((subItem) => (
@@ -64,7 +64,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, depth = 0 }) => {
     <li>
       <a
         href="#"
-        className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+        className="block px-4 py-2 hover:bg-gray-100 hover:text-black w-full text-left"
         id={item.id}
         // data-guide-id={item.id}
         // aria-label={item.description}
@@ -77,7 +77,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, depth = 0 }) => {
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="bg-white shadow">
+    <nav className=" shadow">
       <ul className="flex">
         {navbar.map((item) => (
           <MenuItem key={item.id} item={item} depth={0} />

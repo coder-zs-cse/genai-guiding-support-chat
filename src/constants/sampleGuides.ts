@@ -4,24 +4,24 @@ export const sampleGuides = [
     query: 'How do I import audio from a URL?',
     steps: [
       {
-        id: 1,
-        highlightSelector: 'file',
-        description: 'Open the File menu'
+        id: 'step1',
+        attachTo: { element: '#file', on: 'bottom' },
+        text: 'Open the File menu'
       },
       {
-        id: 2,
-        highlightSelector: 'import',
-        description: 'Click on Import'
+        id: 'step2',
+        attachTo: { element: '#import', on: 'right' },
+        text: 'Click on Import'
       },
       {
-        id: 3,
-        highlightSelector: 'import-audio',
-        description: 'Select Audio'
+        id: 'step3',
+        attachTo: { element: '#import-audio', on: 'right' },
+        text: 'Select Audio'
       },
       {
-        id: 4,
-        highlightSelector: 'import-audio-url',
-        description: 'Choose From URL'
+        id: 'step4',
+        attachTo: { element: '#import-audio-url', on: 'right' },
+        text: 'Choose From URL'
       }
     ]
   },
@@ -30,29 +30,29 @@ export const sampleGuides = [
     query: 'How can I export my project for YouTube?',
     steps: [
       {
-        id: 1,
-        highlightSelector: 'file',
-        description: 'Open the File menu'
+        id: 'step1',
+        attachTo: { element: '#file', on: 'bottom' },
+        text: 'Open the File menu'
       },
       {
-        id: 2,
-        highlightSelector: 'export',
-        description: 'Click on Export'
+        id: 'step2',
+        attachTo: { element: '#export', on: 'right' },
+        text: 'Click on Export'
       },
       {
-        id: 3,
-        highlightSelector: 'export-advanced',
-        description: 'Select Advanced'
+        id: 'step3',
+        attachTo: { element: '#export-advanced', on: 'right' },
+        text: 'Select Advanced'
       },
       {
-        id: 4,
-        highlightSelector: 'export-presets',
-        description: 'Choose Presets'
+        id: 'step4',
+        attachTo: { element: '#export-presets', on: 'right' },
+        text: 'Choose Presets'
       },
       {
-        id: 5,
-        highlightSelector: 'export-youtube',
-        description: 'Select YouTube'
+        id: 'step5',
+        attachTo: { element: '#export-youtube', on: 'right' },
+        text: 'Select YouTube'
       }
     ]
   },
@@ -61,19 +61,19 @@ export const sampleGuides = [
     query: 'How do I access the color correction tools?',
     steps: [
       {
-        id: 1,
-        highlightSelector: 'tools',
-        description: 'Open the Tools menu'
+        id: 'step1',
+        attachTo: { element: '#tools', on: 'bottom' },
+        text: 'Open the Tools menu'
       },
       {
-        id: 2,
-        highlightSelector: 'color-tools',
-        description: 'Click on Color Tools'
+        id: 'step2',
+        attachTo: { element: '#color-tools', on: 'right' },
+        text: 'Click on Color Tools'
       },
       {
-        id: 3,
-        highlightSelector: 'color-wheels',
-        description: 'Select Color Wheels for precise color adjustments'
+        id: 'step3',
+        attachTo: { element: '#color-wheels', on: 'right' },
+        text: 'Select Color Wheels for precise color adjustments'
       }
     ]
   },
@@ -82,24 +82,24 @@ export const sampleGuides = [
     query: 'How can I view the system information for troubleshooting?',
     steps: [
       {
-        id: 1,
-        highlightSelector: 'help',
-        description: 'Open the Help menu'
+        id: 'step1',
+        attachTo: { element: '#help', on: 'bottom' },
+        text: 'Open the Help menu'
       },
       {
-        id: 2,
-        highlightSelector: 'support',
-        description: 'Click on Support'
+        id: 'step2',
+        attachTo: { element: '#support', on: 'right' },
+        text: 'Click on Support'
       },
       {
-        id: 3,
-        highlightSelector: 'diagnostics',
-        description: 'Select Diagnostics'
+        id: 'step3',
+        attachTo: { element: '#diagnostics', on: 'right' },
+        text: 'Select Diagnostics'
       },
       {
-        id: 4,
-        highlightSelector: 'system-info',
-        description: 'Choose System Info to view detailed system information'
+        id: 'step4',
+        attachTo: { element: '#system-info', on: 'right' },
+        text: 'Choose System Info to view detailed system information'
       }
     ]
   },
@@ -108,29 +108,29 @@ export const sampleGuides = [
     query: 'How do I import images from Unsplash?',
     steps: [
       {
-        id: 1,
-        highlightSelector: 'file',
-        description: 'Open the File menu'
+        id: 'step1',
+        attachTo: { element: '#file', on: 'bottom' },
+        text: 'Open the File menu'
       },
       {
-        id: 2,
-        highlightSelector: 'import',
-        description: 'Click on Import'
+        id: 'step2',
+        attachTo: { element: '#import', on: 'right' },
+        text: 'Click on Import'
       },
       {
-        id: 3,
-        highlightSelector: 'import-images',
-        description: 'Select Images'
+        id: 'step3',
+        attachTo: { element: '#import-images', on: 'right' },
+        text: 'Select Images'
       },
       {
-        id: 4,
-        highlightSelector: 'import-images-stock',
-        description: 'Choose From Stock'
+        id: 'step4',
+        attachTo: { element: '#import-images-stock', on: 'right' },
+        text: 'Choose From Stock'
       },
       {
-        id: 5,
-        highlightSelector: 'import-images-unsplash',
-        description: 'Select Unsplash to import images from their library'
+        id: 'step5',
+        attachTo: { element: '#import-images-unsplash', on: 'right' },
+        text: 'Select Unsplash to import images from their library'
       }
     ]
   }

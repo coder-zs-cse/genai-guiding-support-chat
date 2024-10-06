@@ -1,96 +1,90 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import StepRenderer from './step-renderer';
+import React, { useEffect, useRef } from 'react';
+import Shepherd, { Tour } from 'shepherd.js';
 
 export interface Step {
   id: string;
-  highlightSelector: string;
-  description: string;
+  attachTo: {
+    element: string;
+    on:  'top' | 'bottom' | 'left' | 'right';
+  };
+  text: string;
 }
 
 interface GuidedTourProps {
-    steps: Step[];
-    onEnd: () => void;
+  steps: Step[];
+  onEnd: () => void;
 }
 
 const GuidedTour: React.FC<GuidedTourProps> = ({ steps, onEnd }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const tourRef = useRef<Tour | null>(null);
 
-  const waitForElement = useCallback((selector: string, callback: (element: Element) => void, timeout = 5000) => {
-    const startTime = Date.now();
-    const checkElement = () => {
-      const element = document.querySelector(selector);
-      if (element) {
-        callback(element);
-      } else if (Date.now() - startTime < timeout) {
-        setTimeout(checkElement, 100);
-      } else {
-        console.log(`Element with selector ${selector} not found within ${timeout}ms`);
-      }
-    };
-    checkElement();
-  }, []);
+  // Add this function to wait for an element to appear in the DOM
+  const waitForElement = (selector: string, timeout = 5000): Promise<Element> => {
+    return new Promise((resolve, reject) => {
+      const startTime = Date.now();
+      const checkElement = () => {
+        const element = document.querySelector(selector);
+        if (element) {
+          resolve(element);
+        } else if (Date.now() - startTime > timeout) {
+          reject(new Error(`Element ${selector} not found within ${timeout}ms`));
+        } else {
+          requestAnimationFrame(checkElement);
+        }
+      };
+      checkElement();
+    });
+  };
 
   useEffect(() => {
-    console.log(`Current step: ${currentStep}`); // Logging current step
-    const selector = `#${steps[currentStep].highlightSelector}`;
-    const style = document.createElement('style');
-    style.innerHTML = `${selector} { outline: 2px solid blue; box-shadow: 0 0 10px rgba(0,0,255,0.5); }`;
-    document.head.appendChild(style);
+    const tour = new Shepherd.Tour({
+      defaultStepOptions: {
+        cancelIcon: {
+          enabled: true
+        },
+        arrow: true,
+        classes: 'shepherd-theme-default',
+        scrollTo: true
+      }
+    });
+    tourRef.current = tour;
+    
+    steps.forEach((step, index) => {
+      tour.addStep({
+        id: step.id,
+        attachTo: step.attachTo,
+        text: step.text,
+        beforeShowPromise: () => waitForElement(step.attachTo.element),
+        buttons: [
+          ...(index > 0 ? [{
+            text: 'Back',
+            action: tour.back
+          }] : []),
+          {
+            text: index === steps.length - 1 ? 'Finish' : 'Next',
+            action: index === steps.length - 1 ? tour.complete : tour.next
+          }
+        ]
+      });
+    });
 
-    // waitForElement(selector, (targetElement) => {
-    //   targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      
-    //   const handleElementClick = () => {
-    //     handleNext();
-    //   };
-    //   targetElement.addEventListener('click', handleElementClick);
+    tour.on('complete', () => {
+      setTimeout(onEnd, 0);
+    });
+    tour.on('cancel', () => {
+      setTimeout(onEnd, 0);
+    });
 
-    //   return () => {
-    //     targetElement.removeEventListener('click', handleElementClick);
-    //   };
-    // });
+    tour.start();
 
     return () => {
-      document.head.removeChild(style);
+      if (tourRef.current) {
+        tourRef.current.cancel();
+      }
     };
-  }, [currentStep, steps, waitForElement]);
+  }, [steps, onEnd]);
 
-  const handleNext = useCallback(() => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(prevStep => {
-        const nextStep = prevStep + 1;
-        console.log(`Moving to step: ${nextStep}`); // Logging next step
-        return nextStep;
-      });
-    } else {
-      handleClose();
-    }
-  }, [currentStep, steps.length]);
-
-  const handlePrev = useCallback(() => {
-    if (currentStep > 0) {
-      setCurrentStep(prevStep => prevStep - 1);
-    }
-  }, [currentStep]);
-
-  const handleClose = useCallback(() => {
-    onEnd();
-  }, [onEnd]);
-
-  return (
-    <div className="guided-tour  ">
-      <button className="guided-tour__close-btn" onClick={handleClose}>
-        &times;
-      </button>
-      <StepRenderer
-        step={steps[currentStep]}
-        onNext={handleNext}
-        onPrev={handlePrev}
-        isFirstStep={currentStep === 0}
-        isLastStep={currentStep === steps.length - 1}
-      />
-    </div>
-  );
+  return null; // Changed from <></> to null
 };
 
 export default GuidedTour;
