@@ -3,6 +3,16 @@ This project implements a GenAI-powered Guiding Tour generation support Chat fea
 
 *Ask a query like 'How do i import audio from URL?' and let the AI do the magic for you!*
 
+![image](https://github.com/user-attachments/assets/f4f01b20-5dcd-47c0-8c94-e57d60f8f279)
+
+![image](https://github.com/user-attachments/assets/aa902347-5fa5-45e1-99e5-dbc24448573e)
+
+![image](https://github.com/user-attachments/assets/6a48d730-1d8f-4857-9dc9-51a544ad5893)
+
+![image](https://github.com/user-attachments/assets/23004ab5-c190-4316-87e7-5bde2ada87f5)
+
+![image](https://github.com/user-attachments/assets/611c8362-9865-4f04-a05a-0693046c97d9)
+
 ## Tech Stack
 
 - Next.js 14
