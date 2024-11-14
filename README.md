@@ -31,15 +31,15 @@ for ex like Video Editing Softwares, or Cloud Providers websites, package docume
 
 Clone the repository:
 ```
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/coder-zs-cse/genai-guiding-support-chat.git
+cd genai-guiding-support-chat
 ```
 
 Install dependencies:
 ```
 npm install
 # or
-yarn install
+pnpm install
 ```
 
 Set up environment variables:
@@ -53,8 +53,6 @@ Usage
 Start the development server:
 ```
 npm run dev
-# or
-yarn dev
 ```
 
 Open your browser and navigate to ```http://localhost:3000```
