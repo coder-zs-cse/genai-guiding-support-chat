@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import { useCopilotReadable, useCopilotAction } from "@copilotkit/react-core";
 import { CopilotPopup, useCopilotChatSuggestions  } from "@copilotkit/react-ui";
-import { CopilotTextarea } from "@copilotkit/react-textarea";
-import HelpAgent from "@/components/help-agent";
 import GuidedTour, { Step } from "@/components/guided-tour";
 import { navbar } from "@/constants/navbar";
 import { sampleGuides } from "@/constants/sampleGuides";
@@ -66,14 +64,31 @@ const App = () => {
               type: "string",
               description: "Description of the step",
               required: true,
+            },
+            advanceOn: {
+              type: "object",
+              properties: {
+                selector: { type: "string", required: true },
+                event: { type: "string", required: true }
+              },
+              required: true,
+              description: "Specifies which element and event triggers the next step"
             }
           }
         }
       }
     ],
     handler: (args: { steps: Step[] }) => {
-      console.log("args.steps", args.steps);
-      setTourSteps(args.steps);
+      const stepsWithAdvance = args.steps.map(step => ({
+        ...step,
+        buttons: [],
+        advanceOn: {
+          selector: step.attachTo.element,
+          event: 'click'
+        }
+      }));
+      
+      setTourSteps(stepsWithAdvance);
       setIsTourActive(true);
     }
   });
@@ -84,7 +99,7 @@ const App = () => {
   };
 
   return (
-    <div className="app debug relat ">
+    <div className="app relative">
       {/* <HelpAgent onStartTour={startTour} /> */}
       <CopilotPopup
         labels={{

@@ -5,9 +5,13 @@ export interface Step {
   id: string;
   attachTo: {
     element: string;
-    on:  'top' | 'bottom' | 'left' | 'right';
+    on: 'top' | 'bottom' | 'left' | 'right';
   };
   text: string;
+  advanceOn?: {
+    selector: string;
+    event: string;
+  };
 }
 
 interface GuidedTourProps {
@@ -18,8 +22,7 @@ interface GuidedTourProps {
 const GuidedTour: React.FC<GuidedTourProps> = ({ steps, onEnd }) => {
   const tourRef = useRef<Tour | null>(null);
 
-  // Add this function to wait for an element to appear in the DOM
-  const waitForElement = (selector: string, timeout = 5000): Promise<Element> => {
+  const waitForElement = (selector: string, timeout = 10000): Promise<Element> => {
     return new Promise((resolve, reject) => {
       const startTime = Date.now();
       const checkElement = () => {
@@ -44,35 +47,45 @@ const GuidedTour: React.FC<GuidedTourProps> = ({ steps, onEnd }) => {
         },
         arrow: true,
         classes: 'shepherd-theme-default',
-        scrollTo: true
+        scrollTo: true,
+        buttons: [],
       }
     });
+    
     tourRef.current = tour;
     
-    steps.forEach((step, index) => {
+    steps.forEach((step) => {
       tour.addStep({
         id: step.id,
         attachTo: step.attachTo,
         text: step.text,
         beforeShowPromise: () => waitForElement(step.attachTo.element),
-        buttons: [
-          ...(index > 0 ? [{
-            text: 'Back',
-            action: tour.back
-          }] : []),
-          {
-            text: index === steps.length - 1 ? 'Finish' : 'Next',
-            action: index === steps.length - 1 ? tour.complete : tour.next
-          }
-        ]
+        advanceOn: step.advanceOn || {
+          selector: step.attachTo.element,
+          event: 'click'
+        },
+        buttons: []
       });
     });
 
     tour.on('complete', () => {
       setTimeout(onEnd, 0);
     });
+    
     tour.on('cancel', () => {
       setTimeout(onEnd, 0);
+    });
+
+    const lastStepIndex = steps.length - 1;
+    tour.on('show', (evt) => {
+      if (evt.step.id === steps[lastStepIndex].id) {
+        const element = document.querySelector(steps[lastStepIndex].attachTo.element);
+        if (element) {
+          element.addEventListener('click', () => {
+            tour.complete();
+          }, { once: true });
+        }
+      }
     });
 
     tour.start();
@@ -84,7 +97,7 @@ const GuidedTour: React.FC<GuidedTourProps> = ({ steps, onEnd }) => {
     };
   }, [steps, onEnd]);
 
-  return null; // Changed from <></> to null
+  return null;
 };
 
 export default GuidedTour;
