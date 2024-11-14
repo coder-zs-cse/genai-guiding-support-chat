@@ -87,7 +87,7 @@ const App = () => {
           event: 'click'
         }
       }));
-      
+      console.log("args", args.steps)
       setTourSteps(stepsWithAdvance);
       setIsTourActive(true);
     }

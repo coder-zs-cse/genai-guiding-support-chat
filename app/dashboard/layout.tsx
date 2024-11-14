@@ -12,7 +12,7 @@ export default function DashboardLayout({
 }) {
   return (
     <CopilotKit runtimeUrl="/api/copilotkit">
-      <div className="h-screen w-full">
+      <div className="min-h-screen w-full">
         <Navbar />
         <div className="relative overflow-hidden  w-full">
           <main className="relative ">{children}</main>
